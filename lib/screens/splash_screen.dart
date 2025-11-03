@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-// TODO: import constants.dart nanti setelah file dibuat
-// import 'package:etheramind/utils/constants.dart';
-// TODO: import NameInputScreen nanti setelah file dibuat
-// import 'package:etheramind/screens/name_input_screen.dart';
+import 'package:etheramind/screens/welcome_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -33,11 +30,14 @@ class _SplashScreenState extends State<SplashScreen>
 
     _controller.forward();
 
-    // TODO: nanti ubah delay dan arah navigasi
-
+    // Navigasi ke WelcomeScreen
     Future.delayed(const Duration(seconds: 3), () {
-      // sementara, belum navigasi ke halaman berikut
-      debugPrint("Splash selesai, nanti ke NameInputScreen");
+      if (mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const WelcomeScreen()),
+        );
+      }
     });
   }
 
@@ -89,7 +89,7 @@ class _SplashScreenState extends State<SplashScreen>
               ),
 
               const SizedBox(height: 40),
-              
+
               const CircularProgressIndicator(
                 color: Colors.white,
               ),
