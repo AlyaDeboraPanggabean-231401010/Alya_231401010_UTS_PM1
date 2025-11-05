@@ -3,7 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:etheramind/providers/quiz_provider.dart';
 import 'package:etheramind/utils/constants.dart';
 import 'package:etheramind/widgets/category_card.dart';
-import 'package:etheramind/screens/quiz_screen.dart'; // Tambahkan ini
+import 'package:etheramind/screens/quiz_screen.dart';
+import 'package:etheramind/providers/theme_provider.dart';
 
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({super.key});
@@ -11,10 +12,11 @@ class CategoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final etheramindProvider = Provider.of<EtheramindProvider>(context);
+    final themeProvider = Provider.of<ThemeProvider>(context);
     final categories = etheramindProvider.categories;
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         title: const Text(
           'Pilih Kategori',
@@ -27,6 +29,17 @@ class CategoryScreen extends StatelessWidget {
         foregroundColor: Colors.white,
         elevation: 0,
         centerTitle: true, // Tambahkan ini untuk membuat title di tengah
+                actions: [
+          // Tombol toggle theme
+          IconButton(
+            icon: Icon(
+              themeProvider.isDarkMode ? Icons.light_mode : Icons.dark_mode,
+            ),
+            onPressed: () {
+              themeProvider.toggleTheme();
+            },
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

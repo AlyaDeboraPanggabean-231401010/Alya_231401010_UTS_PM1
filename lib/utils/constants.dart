@@ -20,6 +20,10 @@ class AppColors {
   static const Color success = Color(0xFF48BB78);
   static const Color error = Color(0xFFF56565);
   static const Color warning = Color(0xFFED8936);
+  
+  // Colors untuk dark mode
+  static const Color darkBackground = Color(0xFF121212);
+  static const Color darkSurface = Color(0xFF1E1E1E);
 }
 
 class AppTextStyles {

@@ -23,4 +23,7 @@ class ThemeProvider with ChangeNotifier {
     await prefs.setString('theme_mode', _themeMode == ThemeMode.dark ? 'dark' : 'light');
     notifyListeners();
   }
+
+  // Helper method untuk cek apakah dark mode
+  bool get isDarkMode => _themeMode == ThemeMode.dark;
 }

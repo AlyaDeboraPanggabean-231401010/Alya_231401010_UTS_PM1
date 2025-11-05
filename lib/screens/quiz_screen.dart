@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'dart:async'; 
 import 'package:etheramind/models/quiz_category.dart';
 import 'package:etheramind/providers/quiz_provider.dart';
+import 'package:etheramind/providers/theme_provider.dart'; // TAMBAHKAN IMPORT INI
 import 'package:etheramind/utils/constants.dart';
 import 'package:etheramind/widgets/question_card.dart';
 import 'package:etheramind/widgets/option_button.dart';
@@ -76,6 +77,18 @@ class _QuizScreenState extends State<QuizScreen> {
                 child: TimerWidget(
                   timeRemaining: etheramindProvider.timeRemaining,
                   size: 40,
+                ),
+              ),
+              // Tombol theme toggle
+              Consumer<ThemeProvider>(
+                builder: (context, themeProvider, child) => IconButton(
+                  icon: Icon(
+                    themeProvider.isDarkMode ? Icons.light_mode : Icons.dark_mode,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {
+                    themeProvider.toggleTheme();
+                  },
                 ),
               ),
             ],
@@ -174,7 +187,6 @@ class _QuizScreenState extends State<QuizScreen> {
     final currentQuestionIndex = etheramindProvider.getCurrentQuestionIndex(widget.category.id);
     final isLastQuestion = currentQuestionIndex == AppConstants.questionsPerCategory - 1;
 
-    // Auto-submit empty answer if time's up
     etheramindProvider.answerQuestion(currentQuestionIndex, -1);
     
     if (isLastQuestion) {
