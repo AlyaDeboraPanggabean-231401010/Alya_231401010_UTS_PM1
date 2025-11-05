@@ -100,12 +100,12 @@ class ResultScreen extends StatelessWidget {
                   children: [
                     Text(
                       'Review Jawaban:',
-                      style: TextStyle(
+                        style: TextStyle(
                         fontFamily: 'Montserrat',
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
-                        color: Theme.of(context).colorScheme.onBackground,
-                      ),
+                        color: AppColors.surface,
+                     ),
                     ),
                     const SizedBox(height: 12),
                     Expanded(

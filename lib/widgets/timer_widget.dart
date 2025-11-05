@@ -13,7 +13,7 @@ class TimerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final percentage = timeRemaining / AppConstants.quizTimerSeconds;
+    final percentage = timeRemaining / AppConstants.timePerQuestion ;
     Color timerColor;
     
     if (percentage > 0.6) {

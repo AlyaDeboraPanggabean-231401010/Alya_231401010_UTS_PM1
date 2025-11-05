@@ -13,7 +13,7 @@ class EtheramindProvider with ChangeNotifier {
   Map<String, int> _currentQuestionIndex = {};
   Map<String, int> _scores = {};
   String? _currentCategoryId;
-  int _timeRemaining = AppConstants.quizTimerSeconds;
+  int _timeRemaining = AppConstants.timePerQuestion;
   bool _isTimerRunning = false;
 
   User? get user => _user;
@@ -45,7 +45,7 @@ class EtheramindProvider with ChangeNotifier {
 
   void setCurrentCategory(String categoryId) {
     _currentCategoryId = categoryId;
-    _timeRemaining = AppConstants.quizTimerSeconds;
+    _timeRemaining = AppConstants.timePerQuestion ;
     _currentQuestionIndex[categoryId] = 0;
     notifyListeners();
   }
@@ -54,7 +54,7 @@ class EtheramindProvider with ChangeNotifier {
     _userAnswers[categoryId] = List.filled(AppConstants.questionsPerCategory, -1);
     _currentQuestionIndex[categoryId] = 0;
     _scores[categoryId] = 0;
-    _timeRemaining = AppConstants.quizTimerSeconds;
+    _timeRemaining = AppConstants.timePerQuestion ;
     _isTimerRunning = false;
     notifyListeners();
   }
@@ -100,7 +100,7 @@ class EtheramindProvider with ChangeNotifier {
     final currentIndex = _currentQuestionIndex[_currentCategoryId!] ?? 0;
     if (currentIndex < AppConstants.questionsPerCategory - 1) {
       _currentQuestionIndex[_currentCategoryId!] = currentIndex + 1;
-      _timeRemaining = AppConstants.quizTimerSeconds;
+      _timeRemaining = AppConstants.timePerQuestion ;
       notifyListeners();
     }
   }
@@ -111,7 +111,7 @@ class EtheramindProvider with ChangeNotifier {
     final currentIndex = _currentQuestionIndex[_currentCategoryId!] ?? 0;
     if (currentIndex > 0) {
       _currentQuestionIndex[_currentCategoryId!] = currentIndex - 1;
-      _timeRemaining = AppConstants.quizTimerSeconds;
+      _timeRemaining = AppConstants.timePerQuestion ;
       notifyListeners();
     }
   }
@@ -151,16 +151,29 @@ class EtheramindProvider with ChangeNotifier {
   }
 
   void resetTimer() {
-    _timeRemaining = AppConstants.quizTimerSeconds;
+    _timeRemaining = AppConstants.timePerQuestion ;
     _isTimerRunning = false;
     notifyListeners();
   }
 
   void resetQuiz() {
     _initializeData();
-    _timeRemaining = AppConstants.quizTimerSeconds;
+    _timeRemaining = AppConstants.timePerQuestion ;
     _isTimerRunning = false;
     _currentCategoryId = null;
+    notifyListeners();
+  }
+
+  void resetTimerForNextQuestion() {
+    stopTimer();
+    _timeRemaining = AppConstants.timePerQuestion; // Reset ke waktu awal
+    _isTimerRunning = true;
+    notifyListeners();
+  }
+
+  void startTimerForQuiz() {
+    _timeRemaining = AppConstants.timePerQuestion;
+    _isTimerRunning = true;
     notifyListeners();
   }
 }

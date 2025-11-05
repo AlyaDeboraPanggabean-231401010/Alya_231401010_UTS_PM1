@@ -17,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen>
   void initState() {
     super.initState();
 
-    // TODO: atur durasi dan curve animasi nanti
+    
     _controller = AnimationController(
       duration: const Duration(seconds: 2),
       vsync: this,
@@ -49,7 +49,7 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
-    // TODO: nanti ubah warna background pakai AppColors.primary
+   
     return Scaffold(
       backgroundColor: Colors.black,
       body: Center(
@@ -68,7 +68,7 @@ class _SplashScreenState extends State<SplashScreen>
 
               // Text EtheraMind
               const Text(
-                'Etheramind',
+                'EtheraMind',
                 style: TextStyle(
                   fontFamily: 'Montserrat', // pakai font Montserrat
                   fontSize: 36,

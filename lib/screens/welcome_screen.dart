@@ -16,16 +16,19 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // final themeProvider = Provider.of<ThemeProvider>(context);
+
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
-        child: Padding(
+        child: SingleChildScrollView( // ✅ PASTIKAN ADA INI
           padding: const EdgeInsets.all(24.0),
           child: Form(
             key: _formKey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                
                 // Logo EtheraMind
                 Image.asset(
                   'assets/images/etheramind_logo.png',
@@ -35,27 +38,27 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 const SizedBox(height: 32),
 
                 // Welcome text
-                const Text(
+                Text(
                   'Selamat Datang di EtheraMind!',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontFamily: 'Montserrat',
                     fontSize: 26,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.onBackground,
                   ),
                 ),
 
                 const SizedBox(height: 12),
 
                 // Subjudul
-                const Text(
+                Text(
                   'Masukkan nama kamu untuk mulai tantangan!',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontFamily: 'Montserrat',
                     fontSize: 16,
-                    color: Colors.white70,
+                    color: Theme.of(context).colorScheme.onBackground.withOpacity(0.7),
                   ),
                 ),
 
@@ -64,29 +67,29 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 // Input nama
                 TextFormField(
                   controller: _nameController,
-                  style: const TextStyle(
-                    color: Colors.white,
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onBackground,
                     fontFamily: 'Montserrat',
                   ),
                   decoration: InputDecoration(
                     filled: true,
-                    fillColor: Colors.white10,
+                    fillColor: Theme.of(context).colorScheme.surface,
                     labelText: 'Nama Kamu',
-                    labelStyle: const TextStyle(
-                      color: Colors.white70,
+                    labelStyle: TextStyle(
+                      color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
                       fontFamily: 'Montserrat',
                     ),
-                    prefixIcon: const Icon(Icons.person, color: Colors.white70),
+                    prefixIcon: Icon(Icons.person, color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7)),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(color: Colors.white30),
+                      borderSide: BorderSide(color: Theme.of(context).colorScheme.outline),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
-                      borderSide: const BorderSide(color: Colors.white),
+                      borderSide: BorderSide(color: Theme.of(context).colorScheme.primary),
                     ),
                   ),
                   validator: (value) {
@@ -126,6 +129,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     ),
                   ),
                 ),
+
+                const SizedBox(height: 20), // ✅ EXTRA SPACE
               ],
             ),
           ),
