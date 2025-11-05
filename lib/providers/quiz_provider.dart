@@ -117,6 +117,11 @@ class EtheramindProvider with ChangeNotifier {
     if (_isTimerRunning && _timeRemaining > 0) {
       _timeRemaining--;
       notifyListeners();
+
+      // Jika waktu habis, otomatis stop timer
+      if (_timeRemaining == 0) {
+        _isTimerRunning = false;
+      }
     }
   }
 

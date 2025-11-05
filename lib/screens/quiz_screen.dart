@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'dart:async'; 
 import 'package:etheramind/models/quiz_category.dart';
 import 'package:etheramind/providers/quiz_provider.dart';
 import 'package:etheramind/utils/constants.dart';
@@ -17,34 +18,38 @@ class QuizScreen extends StatefulWidget {
   State<QuizScreen> createState() => _QuizScreenState();
 }
 
-class _QuizScreenState extends State<QuizScreen> with SingleTickerProviderStateMixin {
-  late AnimationController _timerController;
+class _QuizScreenState extends State<QuizScreen> {
+  Timer? _timer;
 
   @override
   void initState() {
     super.initState();
-    _timerController = AnimationController(
-      duration: const Duration(seconds: 1),
-      vsync: this,
-    );
     _startTimer();
   }
 
   void _startTimer() {
     final etheramindProvider = Provider.of<EtheramindProvider>(context, listen: false);
     etheramindProvider.startTimer();
-    _timerController.repeat();
+    
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      final provider = Provider.of<EtheramindProvider>(context, listen: false);
+      provider.updateTimer();
+      
+      if (provider.timeRemaining == 0) {
+        _handleTimeUp(provider);
+      }
+    });
   }
 
   void _stopTimer() {
     final etheramindProvider = Provider.of<EtheramindProvider>(context, listen: false);
     etheramindProvider.stopTimer();
-    _timerController.stop();
+    _timer?.cancel();
   }
 
   @override
   void dispose() {
-    _timerController.dispose();
+    _timer?.cancel();
     super.dispose();
   }
 
@@ -57,14 +62,6 @@ class _QuizScreenState extends State<QuizScreen> with SingleTickerProviderStateM
         final currentQuestion = questions[currentQuestionIndex];
         final userAnswer = etheramindProvider.getUserAnswer(widget.category.id, currentQuestionIndex);
         final isLastQuestion = currentQuestionIndex == AppConstants.questionsPerCategory - 1;
-
-        // Timer listener
-        _timerController.addListener(() {
-          etheramindProvider.updateTimer();
-          if (etheramindProvider.timeRemaining == 0) {
-            _handleTimeUp(etheramindProvider, currentQuestionIndex, isLastQuestion);
-          }
-        });
 
         return Scaffold(
           appBar: AppBar(
@@ -88,7 +85,6 @@ class _QuizScreenState extends State<QuizScreen> with SingleTickerProviderStateM
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: [
-                  // Question Card
                   QuestionCard(
                     question: currentQuestion.questionText,
                     questionNumber: currentQuestionIndex + 1,
@@ -97,7 +93,6 @@ class _QuizScreenState extends State<QuizScreen> with SingleTickerProviderStateM
                   
                   const SizedBox(height: 24),
                   
-                  // Options
                   Expanded(
                     child: ListView.builder(
                       itemCount: currentQuestion.options.length,
@@ -119,10 +114,8 @@ class _QuizScreenState extends State<QuizScreen> with SingleTickerProviderStateM
                     ),
                   ),
                   
-                  // Navigation Buttons
                   Row(
                     children: [
-                      // Previous Button
                       Expanded(
                         child: ElevatedButton(
                           onPressed: currentQuestionIndex > 0 ? () {
@@ -143,7 +136,6 @@ class _QuizScreenState extends State<QuizScreen> with SingleTickerProviderStateM
                       ),
                       const SizedBox(width: 12),
                       
-                      // Next/Submit Button
                       Expanded(
                         child: ElevatedButton(
                           onPressed: userAnswer != -1 ? () {
@@ -178,7 +170,10 @@ class _QuizScreenState extends State<QuizScreen> with SingleTickerProviderStateM
     );
   }
 
-  void _handleTimeUp(EtheramindProvider etheramindProvider, int currentQuestionIndex, bool isLastQuestion) {
+  void _handleTimeUp(EtheramindProvider etheramindProvider) {
+    final currentQuestionIndex = etheramindProvider.getCurrentQuestionIndex(widget.category.id);
+    final isLastQuestion = currentQuestionIndex == AppConstants.questionsPerCategory - 1;
+
     // Auto-submit empty answer if time's up
     etheramindProvider.answerQuestion(currentQuestionIndex, -1);
     
