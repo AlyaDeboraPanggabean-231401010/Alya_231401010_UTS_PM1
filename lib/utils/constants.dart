@@ -17,6 +17,9 @@ class AppColors {
   static const Color surface = Color(0xFFFFFFFF);
   static const Color textPrimary = Color(0xFF2D3748);
   static const Color textSecondary = Color(0xFF718096);
+  static const Color success = Color(0xFF48BB78);
+  static const Color error = Color(0xFFF56565);
+  static const Color warning = Color(0xFFED8936);
 }
 
 class AppTextStyles {

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:etheramind/providers/quiz_provider.dart';
 import 'package:etheramind/utils/constants.dart';
 import 'package:etheramind/widgets/category_card.dart';
+import 'package:etheramind/screens/quiz_screen.dart'; // Tambahkan ini
 
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({super.key});
@@ -95,7 +96,13 @@ class CategoryScreen extends StatelessWidget {
                     score: score,
                     onTap: () {
                       etheramindProvider.setCurrentCategory(category.id);
-                      // TODO: Navigasi ke halaman kuis nanti
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => QuizScreen(category: category),
+                        ),
+                      );
+                      
                     },
                   );
                 },
