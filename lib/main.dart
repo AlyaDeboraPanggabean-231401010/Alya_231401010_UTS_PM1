@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart'; // Tambahkan ini!
 import 'package:etheramind/screens/splash_screen.dart';
-
+import 'package:etheramind/providers/quiz_provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => EtheramindProvider(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -11,11 +17,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: ubah ke MultiProvider + Consumer<ThemeProvider> nanti
     return MaterialApp(
       title: 'EtheraMind',
       debugShowCheckedModeBanner: false,
-      // TODO: nanti ganti dengan light/dark theme
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
         fontFamily: 'Montserrat',

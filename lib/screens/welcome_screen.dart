@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart'; 
+import 'package:etheramind/providers/quiz_provider.dart'; 
 import 'package:etheramind/screens/category_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -136,9 +138,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     if (_formKey.currentState!.validate()) {
       final name = _nameController.text.trim();
 
-      // TODO: sambungkan ke QuizProvider nanti
-      // final quizProvider = Provider.of<QuizProvider>(context, listen: false);
-      // quizProvider.setUserName(name);
+      // Simpan nama user ke provider
+      final etheramindProvider = Provider.of<EtheramindProvider>(context, listen: false);
+      etheramindProvider.setUserName(name);
 
       
       Navigator.pushReplacement(

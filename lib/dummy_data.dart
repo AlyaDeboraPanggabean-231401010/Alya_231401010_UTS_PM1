@@ -5,19 +5,24 @@ import 'package:etheramind/models/question.dart';
 class DummyData {
   static final List<QuizCategory> categories = [
     QuizCategory(
-      id: '1',
-      name: 'Sains',
-      description: 'Pengetahuan Umum Tentang Sains',
-      icon: 'assets/images/sains.logo.png',
-      colorValue: Colors.blue.value,
-    ),
-    QuizCategory(
-      id: '2',
-      name: 'Teknologi',
-      description: 'Teknologi dan Pemrograman',
-      icon: 'assets/images/Teknologi.png',
-      colorValue: Colors.purple.value,
-    ),
+    id: '1',
+    name: 'Sains',
+    description: 'Pengetahuan Umum Tentang Sains',
+    icon: 'assets/images/sains.logo.png',
+    colorValue: Colors.blue.value,
+    title: 'Kuis Sains',
+   
+  ),
+  QuizCategory(
+    id: '2',
+    name: 'Teknologi',
+    description: 'Teknologi dan Pemrograman',
+    icon: 'assets/images/Teknologi.png',
+    colorValue: Colors.purple.value,
+    title: 'Kuis Teknologi',
+   
+  ),
+
   ];
 
   static final List<Question> questions = [

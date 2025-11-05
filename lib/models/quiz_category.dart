@@ -6,6 +6,8 @@ class QuizCategory {
   final String description;
   final String icon;
   final int colorValue;
+  final String title;
+  
 
   QuizCategory({
     required this.id,
@@ -13,6 +15,8 @@ class QuizCategory {
     required this.description,
     required this.icon,
     required this.colorValue,
+    required this.title,
+    
   });
 
   Color get color => Color(colorValue);
