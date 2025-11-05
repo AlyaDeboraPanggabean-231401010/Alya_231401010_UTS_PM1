@@ -104,7 +104,7 @@ class ResultScreen extends StatelessWidget {
                         fontFamily: 'Montserrat',
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
-                        color: AppColors.surface,
+                        color: Theme.of(context).colorScheme.onBackground,
                      ),
                     ),
                     const SizedBox(height: 12),

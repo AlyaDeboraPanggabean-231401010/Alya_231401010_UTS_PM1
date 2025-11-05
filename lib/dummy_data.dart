@@ -30,42 +30,62 @@ class DummyData {
     Question(
       id: '1',
       categoryId: '1',
-      questionText: 'Planet manakah yang dikenal sebagai Planet Merah?',
-      options: ['Venus', 'Mars', 'Jupiter', 'Saturnus'],
+      questionText: 'Mengapa kutub magnet bumi tidak tetap?',
+      options: [
+        'Pengaruh rotasi bulan',
+        'Perubahan inti bumi yang cair',
+        'Pergeseran lempeng tektonik',
+        'Variasi medan gravitasi matahari'
+      ],
       correctAnswerIndex: 1,
-      explanation: 'Mars dikenal sebagai Planet Merah karena permukaannya yang berwarna kemerahan.',
+      explanation: 'Kutub magnet bumi bergeser karena perubahan aliran besi cair di inti luar bumi yang menghasilkan medan magnet.',
     ),
     Question(
       id: '2',
       categoryId: '1',
-      questionText: 'Berapakah jumlah tulang dalam tubuh manusia dewasa?',
-      options: ['196', '206', '216', '226'],
-      correctAnswerIndex: 1,
-      explanation: 'Tubuh manusia dewasa memiliki 206 tulang.',
+      questionText: 'Mengapa es mengapung di atas air?',
+      options: [
+        'Karena massa jenis es lebih kecil',
+        'Karena struktur kristal es yang ringan',
+        'Karena tekanan udara di permukaan',
+        'Karena kandungan udara dalam es'
+      ],
+      correctAnswerIndex: 0,
+      explanation: 'Es memiliki massa jenis yang lebih kecil daripada air cair karena molekul air membentuk struktur kristal yang lebih renggang saat membeku.',
     ),
     Question(
       id: '3',
       categoryId: '1',
       questionText: 'Gas apakah yang paling banyak terdapat di atmosfer Bumi?',
-      options: ['Oksigen', 'Nitrogen', 'Karbon Dioksida', 'Helium'],
-      correctAnswerIndex: 1,
+      options: ['Oksigen', 'Karbon Dioksida', 'Nitrogen', 'Helium'],
+      correctAnswerIndex: 2,
       explanation: 'Nitrogen menyusun sekitar 78% atmosfer Bumi.',
     ),
     Question(
       id: '4',
       categoryId: '1',
-      questionText: 'Proses fotosintesis menghasilkan...',
-      options: ['Oksigen', 'Karbon Dioksida', 'Nitrogen', 'Helium'],
-      correctAnswerIndex: 0,
-      explanation: 'Fotosintesis menghasilkan oksigen dan glukosa.',
+      questionText: 'Apa fungsi utama mitokondria dalam sel?',
+      options: [
+        'Regulasi tekanan osmosis',
+        'Sintesis Protein',
+        'Pencernaan intraseluler', 
+        'Produksi energi (ATP)'
+      ],
+      correctAnswerIndex: 3,
+      explanation: 'Mitokondria adalah "pembangkit tenaga" sel yang menghasilkan ATP melalui proses respirasi seluler.',
     ),
     Question(
       id: '5',
       categoryId: '1',
-      questionText: 'Binatang manakah yang termasuk mamalia?',
-      options: ['Ikan Paus', 'Buaya', 'Burung', 'Ular'],
-      correctAnswerIndex: 0,
-      explanation: 'Ikan paus adalah mamalia karena menyusui anaknya.',
+      questionText: 'Apa yang menyebabkan fenomena aurora?',
+      options: [
+        'Refleksi cahaya matahari di es kutub',
+        'Partikel bermuatan dari matahari berinteraksi dengan atmosfer',
+        'Pembakaran meteor di atmosfer',
+        'Emisi cahaya dari gas mulia'
+      ],
+      correctAnswerIndex: 1,
+      explanation: 'Aurora terjadi ketika partikel bermuatan dari angin matahari berinteraksi dengan medan magnet bumi dan atom di atmosfer.',
     ),
 
     // Teknologi Questions (5 questions)
@@ -80,36 +100,36 @@ class DummyData {
     Question(
       id: '7',
       categoryId: '2',
-      questionText: 'Apa kepanjangan dari HTML?',
+      questionText: 'Apa perbedaan utama antara HTTP dan HTTPS?',
       options: [
-        'Hyper Text Markup Language',
-        'High Tech Modern Language',
-        'Hyper Transfer Markup Language',
-        'High Text Modern Language'
+        'HTTPS lebih cepat daripada HTTP',
+        'HTTPS menggunakan enkripsi SSL/TLS',
+        'HTTP hanya untuk website statis',
+        'HTTPS tidak memerlukan server'
       ],
-      correctAnswerIndex: 0,
-      explanation: 'HTML adalah Hyper Text Markup Language.',
+      correctAnswerIndex: 1,
+      explanation: 'HTTPS menggunakan enkripsi SSL/TLS untuk mengamankan komunikasi data, sedangkan HTTP mengirim data dalam bentuk plain text.',
     ),
     Question(
       id: '8',
       categoryId: '2',
-      questionText: 'Manakah yang bukan termasuk sistem operasi?',
-      options: ['Windows', 'Linux', 'Python', 'macOS'],
-      correctAnswerIndex: 2,
-      explanation: 'Python adalah bahasa pemrograman, bukan sistem operasi.',
+       questionText: 'Manakah yang BUKAN termasuk database NoSQL?',
+      options: ['PostgreSQL', 'Redis', 'MongoDB', 'Cassandra'],
+      correctAnswerIndex: 0,
+      explanation: 'PostgreSQL adalah database relational (SQL), sedangkan MongoDB, Redis, dan Cassandra adalah database NoSQL.',
     ),
     Question(
       id: '9',
       categoryId: '2',
-      questionText: 'Apa fungsi utama dari CSS?',
+       questionText: 'Apa yang dimaksud dengan "responsive design" dalam web development?',
       options: [
-        'Menambah interaksi website',
-        'Mengatur tampilan dan style',
-        'Menyimpan data',
-        'Memproses logika bisnis'
+        'Website yang load dengan cepat',
+        'Design yang berubah berdasarkan input user',
+        'Website dengan banyak animasi',
+        'Design yang menyesuaikan layout berdasarkan ukuran device'
       ],
-      correctAnswerIndex: 1,
-      explanation: 'CSS digunakan untuk mengatur tampilan dan style website.',
+      correctAnswerIndex: 3,
+      explanation: 'Responsive design menggunakan CSS media queries untuk menyesuaikan layout website berdasarkan ukuran layar device.',
     ),
     Question(
       id: '10',
