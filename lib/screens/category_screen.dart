@@ -94,7 +94,9 @@ class CategoryScreen extends StatelessWidget {
                   return CategoryCard(
                     category: category,
                     score: score,
-                    onTap: () {
+                   onTap: () {
+                      // RESET: Hapus jawaban dan skor sebelumnya
+                      etheramindProvider.resetCategory(category.id);
                       etheramindProvider.setCurrentCategory(category.id);
                       Navigator.push(
                         context,
@@ -102,7 +104,6 @@ class CategoryScreen extends StatelessWidget {
                           builder: (context) => QuizScreen(category: category),
                         ),
                       );
-                      
                     },
                   );
                 },

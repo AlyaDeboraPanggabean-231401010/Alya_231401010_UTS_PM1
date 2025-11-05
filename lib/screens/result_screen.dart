@@ -224,31 +224,31 @@ class ResultScreen extends StatelessWidget {
               // Action Buttons
               Row(
                 children: [
-                  Expanded(
-                    child: OutlinedButton(
-                      onPressed: () {
-                        etheramindProvider.resetQuiz();
-                        Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(builder: (context) => const CategoryScreen()),
-                          (route) => false,
-                        );
-                      },
-                      style: OutlinedButton.styleFrom(
-                        foregroundColor: AppColors.primary,
-                        side: const BorderSide(color: AppColors.primary),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
+                Expanded(
+                      child: OutlinedButton(
+                        onPressed: () {
+                          etheramindProvider.resetQuiz();
+                          Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(builder: (context) => const CategoryScreen()),
+                            (route) => false,
+                          );
+                        },
+                        style: OutlinedButton.styleFrom(
+                          foregroundColor: AppColors.primary,
+                          side: const BorderSide(color: AppColors.primary),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          padding: const EdgeInsets.symmetric(vertical: 16),
                         ),
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                      ),
-                      child: const Text(
-                        'Quiz Lainnya',
-                        style: TextStyle(fontFamily: 'Montserrat'),
+                        child: const Text(
+                          'Quiz Lainnya',
+                          style: TextStyle(fontFamily: 'Montserrat'),
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(width: 12),
+                    const SizedBox(width: 12),
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
