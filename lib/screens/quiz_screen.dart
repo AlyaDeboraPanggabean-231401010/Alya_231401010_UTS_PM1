@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'dart:async'; 
 import 'package:etheramind/models/quiz_category.dart';
 import 'package:etheramind/providers/quiz_provider.dart';
-import 'package:etheramind/providers/theme_provider.dart'; // TAMBAHKAN IMPORT INI
+import 'package:etheramind/providers/theme_provider.dart';
 import 'package:etheramind/utils/constants.dart';
 import 'package:etheramind/widgets/question_card.dart';
 import 'package:etheramind/widgets/option_button.dart';
@@ -25,12 +25,17 @@ class _QuizScreenState extends State<QuizScreen> {
   @override
   void initState() {
     super.initState();
+    _initializeTimer();
+  }
+
+  void _initializeTimer() {
+    final etheramindProvider = Provider.of<EtheramindProvider>(context, listen: false);
+    etheramindProvider.startTimerForQuiz();
     _startTimer();
   }
 
   void _startTimer() {
-    final etheramindProvider = Provider.of<EtheramindProvider>(context, listen: false);
-    etheramindProvider.startTimer();
+    _timer?.cancel(); // Cancel timer lama dulu
     
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       final provider = Provider.of<EtheramindProvider>(context, listen: false);
@@ -46,6 +51,12 @@ class _QuizScreenState extends State<QuizScreen> {
     final etheramindProvider = Provider.of<EtheramindProvider>(context, listen: false);
     etheramindProvider.stopTimer();
     _timer?.cancel();
+  }
+
+  void _resetAndStartTimer() {
+    final etheramindProvider = Provider.of<EtheramindProvider>(context, listen: false);
+    etheramindProvider.resetTimerForNextQuestion();
+    _startTimer(); // Start timer baru
   }
 
   @override
@@ -79,7 +90,6 @@ class _QuizScreenState extends State<QuizScreen> {
                   size: 40,
                 ),
               ),
-              // Tombol theme toggle
               Consumer<ThemeProvider>(
                 builder: (context, themeProvider, child) => IconButton(
                   icon: Icon(
@@ -132,7 +142,7 @@ class _QuizScreenState extends State<QuizScreen> {
                       Expanded(
                         child: ElevatedButton(
                           onPressed: currentQuestionIndex > 0 ? () {
-                            etheramindProvider.previousQuestion();
+                            _goToPreviousQuestion(etheramindProvider);
                           } : null,
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.grey[300],
@@ -152,12 +162,7 @@ class _QuizScreenState extends State<QuizScreen> {
                       Expanded(
                         child: ElevatedButton(
                           onPressed: userAnswer != -1 ? () {
-                            if (isLastQuestion) {
-                              _stopTimer();
-                              _showSubmitDialog(etheramindProvider);
-                            } else {
-                              etheramindProvider.nextQuestion();
-                            }
+                            _goToNextQuestion(etheramindProvider, isLastQuestion);
                           } : null,
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColors.primary,
@@ -183,17 +188,33 @@ class _QuizScreenState extends State<QuizScreen> {
     );
   }
 
+  void _goToNextQuestion(EtheramindProvider provider, bool isLastQuestion) {
+    if (isLastQuestion) {
+      _stopTimer();
+      _showSubmitDialog(provider);
+    } else {
+      provider.nextQuestion();
+      _resetAndStartTimer(); // ✅ RESET TIMER SETIAP PINDAH SOAL
+    }
+  }
+
+  void _goToPreviousQuestion(EtheramindProvider provider) {
+    provider.previousQuestion();
+    _resetAndStartTimer(); // ✅ RESET TIMER JUGA SAAT KE SOAL SEBELUMNYA
+  }
+
   void _handleTimeUp(EtheramindProvider etheramindProvider) {
     final currentQuestionIndex = etheramindProvider.getCurrentQuestionIndex(widget.category.id);
     final isLastQuestion = currentQuestionIndex == AppConstants.questionsPerCategory - 1;
 
-    etheramindProvider.answerQuestion(currentQuestionIndex, -1);
+    etheramindProvider.answerQuestion(currentQuestionIndex, -1); // -1 untuk waktu habis
     
     if (isLastQuestion) {
       _stopTimer();
       _navigateToResults();
     } else {
       etheramindProvider.nextQuestion();
+      _resetAndStartTimer(); // ✅ RESET TIMER SETELAH TIME UP
     }
   }
 
