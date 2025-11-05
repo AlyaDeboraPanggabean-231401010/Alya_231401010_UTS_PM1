@@ -145,6 +145,7 @@ class EtheramindProvider with ChangeNotifier {
 
       if (_timeRemaining == 0) {
         _isTimerRunning = false;
+        notifyListeners();
       }
     }
   }
