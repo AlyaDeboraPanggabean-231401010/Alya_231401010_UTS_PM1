@@ -54,7 +54,7 @@ class CategoryScreen extends StatelessWidget {
                   fontFamily: 'Montserrat',
                   fontSize: 24,
                   fontWeight: FontWeight.w600,
-                  color: Theme.of(context).colorScheme.onBackground, // ✅ TEST 3
+                  color: Theme.of(context).colorScheme.onBackground, 
                 ),
               ),
               const SizedBox(height: 8),
@@ -63,7 +63,7 @@ class CategoryScreen extends StatelessWidget {
                 style: TextStyle(
                   fontFamily: 'Montserrat',
                   fontSize: 16,
-                  color: Theme.of(context).colorScheme.onBackground.withOpacity(0.7), // ✅ TEST 4
+                  color: Theme.of(context).colorScheme.onBackground.withOpacity(0.7),
                 ),
               ),
               const SizedBox(height: 24),
@@ -74,7 +74,7 @@ class CategoryScreen extends StatelessWidget {
                   fontFamily: 'Montserrat',
                   fontSize: 24,
                   fontWeight: FontWeight.w600,
-                  color: Theme.of(context).colorScheme.onBackground, // ✅ TEST 5
+                  color: Theme.of(context).colorScheme.onBackground, 
                 ),
               ),
               const SizedBox(height: 8),
@@ -83,7 +83,7 @@ class CategoryScreen extends StatelessWidget {
                 style: TextStyle(
                   fontFamily: 'Montserrat',
                   fontSize: 16,
-                  color: Theme.of(context).colorScheme.onBackground.withOpacity(0.7), // ✅ TEST 6
+                  color: Theme.of(context).colorScheme.onBackground.withOpacity(0.7), 
                 ),
               ),
               const SizedBox(height: 24),

@@ -35,7 +35,7 @@ class ResultScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Hasil Quiz'),
+        title: const Text('Hasil Kuis'),
         backgroundColor: category.color,
         foregroundColor: Colors.white,
         elevation: 0,
@@ -99,7 +99,7 @@ class ResultScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Review Jawaban:',
+                      'Tinjau Jawaban:',
                         style: TextStyle(
                         fontFamily: 'Montserrat',
                         fontSize: 20,
@@ -243,7 +243,7 @@ class ResultScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(vertical: 16),
                         ),
                         child: const Text(
-                          'Quiz Lainnya',
+                          'Kuis Lainnya',
                           style: TextStyle(fontFamily: 'Montserrat'),
                         ),
                       ),
@@ -269,7 +269,7 @@ class ResultScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(vertical: 16),
                       ),
                       child: const Text(
-                        'Ulangi Quiz',
+                        'Ulangi Kuis',
                         style: TextStyle(fontFamily: 'Montserrat'),
                       ),
                     ),

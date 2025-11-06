@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// Semua konstanta global untuk app Etheramind / Quizify
+/// Semua konstanta global untuk app Etheramind
 class AppConstants {
   static const String appName = 'EtheraMind';
   static const String fontFamily = 'Montserrat';

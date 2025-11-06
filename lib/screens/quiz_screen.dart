@@ -134,7 +134,6 @@ class _QuizScreenState extends State<QuizScreen> {
                     ),
                   ),
                   
-                  // ✅ HAPUS ROW DAN TOMBOL "SEBELUMNYA", HANYA PAKAI "SELANJUTNYA/SELESAI"
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
@@ -190,13 +189,13 @@ class _QuizScreenState extends State<QuizScreen> {
       builder: (context) => AlertDialog(
         backgroundColor: Theme.of(context).colorScheme.surface,
         title: Text(
-          'Selesai Quiz?',
+          'Selesai Kuis?',
           style: TextStyle(
             color: Theme.of(context).colorScheme.onSurface,
           ),
         ),
         content: Text(
-          'Apakah Anda yakin ingin menyelesaikan quiz ini?',
+          'Apakah Anda yakin ingin menyelesaikan kuis ini?',
           style: TextStyle(
             color: Theme.of(context).colorScheme.onSurface,
           ),

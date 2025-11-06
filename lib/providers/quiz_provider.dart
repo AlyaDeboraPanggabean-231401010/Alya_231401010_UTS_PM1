@@ -71,7 +71,7 @@ class EtheramindProvider with ChangeNotifier {
     // Simpan jawaban user
     _userAnswers[_currentCategoryId!]![questionIndex] = selectedOption;
     
-    // HITUNG ULANG SEMUA SKOR
+    // Hitung ulang semua skor
     _calculateScoreForCurrentCategory();
     
     notifyListeners();

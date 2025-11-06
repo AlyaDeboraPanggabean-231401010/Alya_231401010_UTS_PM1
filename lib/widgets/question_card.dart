@@ -21,7 +21,7 @@ class QuestionCard extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16), 
-          color: Theme.of(context).colorScheme.surface, // ✅ BACKGROUND THEME
+          color: Theme.of(context).colorScheme.surface, 
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,7 +54,7 @@ class QuestionCard extends StatelessWidget {
                 fontFamily: 'Montserrat',
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
-                color: Theme.of(context).colorScheme.onSurface, // ✅ TEXT PUTIH DI DARK MODE
+                color: Theme.of(context).colorScheme.onSurface,
                 height: 1.4,
               ),
             ),
