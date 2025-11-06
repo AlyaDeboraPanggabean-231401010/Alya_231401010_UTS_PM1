@@ -23,7 +23,7 @@ class CategoryScreen extends StatelessWidget {
           style: TextStyle(
             fontFamily: 'Montserrat',
             fontWeight: FontWeight.w600,
-            color: Theme.of(context).colorScheme.onPrimary, // ✅ TEST 1
+            color: Theme.of(context).colorScheme.onPrimary, 
           ),
         ),
         backgroundColor: AppColors.primary,
@@ -34,7 +34,7 @@ class CategoryScreen extends StatelessWidget {
           IconButton(
             icon: Icon(
               themeProvider.isDarkMode ? Icons.light_mode : Icons.dark_mode,
-              color: Theme.of(context).colorScheme.onPrimary, // ✅ TEST 2
+              color: Colors.white, 
             ),
             onPressed: () {
               themeProvider.toggleTheme();

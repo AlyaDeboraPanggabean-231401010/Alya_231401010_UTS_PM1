@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'dart:async'; 
@@ -50,6 +48,13 @@ class _QuizScreenState extends State<QuizScreen> {
     _timer?.cancel();
   }
 
+  void _resetAndStartTimer() {
+    _timer?.cancel(); // Stop timer lama
+    final etheramindProvider = Provider.of<EtheramindProvider>(context, listen: false);
+    etheramindProvider.resetTimerForNextQuestion(); // Reset waktu di provider
+    _startTimer(); // Start timer baru
+  }
+
   @override
   void dispose() {
     _timer?.cancel();
@@ -67,7 +72,7 @@ class _QuizScreenState extends State<QuizScreen> {
         final isLastQuestion = currentQuestionIndex == AppConstants.questionsPerCategory - 1;
 
         return Scaffold(
-          backgroundColor: Theme.of(context).colorScheme.background, // ✅ BACKGROUND THEME
+          backgroundColor: Theme.of(context).colorScheme.background,
           appBar: AppBar(
             title: Text(widget.category.name),
             backgroundColor: widget.category.color,
@@ -129,52 +134,31 @@ class _QuizScreenState extends State<QuizScreen> {
                     ),
                   ),
                   
-                  Row(
-                    children: [
-                      Expanded(
-                        child: ElevatedButton(
-                          onPressed: currentQuestionIndex > 0 ? () {
-                            etheramindProvider.previousQuestion();
-                          } : null,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Theme.of(context).colorScheme.surface, // ✅ THEME
-                            foregroundColor: Theme.of(context).colorScheme.onSurface, // ✅ THEME
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                          ),
-                          child: const Text(
-                            'Sebelumnya',
-                            style: TextStyle(fontFamily: 'Montserrat'),
-                          ),
+                  // ✅ HAPUS ROW DAN TOMBOL "SEBELUMNYA", HANYA PAKAI "SELANJUTNYA/SELESAI"
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: userAnswer != -1 ? () {
+                        if (isLastQuestion) {
+                          _stopTimer();
+                          _showSubmitDialog(etheramindProvider);
+                        } else {
+                          etheramindProvider.nextQuestion();
+                          _resetAndStartTimer();
+                        }
+                      } : null,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Theme.of(context).colorScheme.primary,
+                        foregroundColor: Theme.of(context).colorScheme.onPrimary,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                      const SizedBox(width: 12),
-                      
-                      Expanded(
-                        child: ElevatedButton(
-                          onPressed: userAnswer != -1 ? () {
-                            if (isLastQuestion) {
-                              _stopTimer();
-                              _showSubmitDialog(etheramindProvider);
-                            } else {
-                              etheramindProvider.nextQuestion();
-                            }
-                          } : null,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Theme.of(context).colorScheme.primary, // ✅ THEME
-                            foregroundColor: Theme.of(context).colorScheme.onPrimary, // ✅ THEME
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                          ),
-                          child: Text(
-                            isLastQuestion ? 'Selesai' : 'Selanjutnya',
-                            style: const TextStyle(fontFamily: 'Montserrat'),
-                          ),
-                        ),
+                      child: Text(
+                        isLastQuestion ? 'Selesai' : 'Selanjutnya',
+                        style: const TextStyle(fontFamily: 'Montserrat'),
                       ),
-                    ],
+                    ),
                   ),
                 ],
               ),
@@ -196,6 +180,7 @@ class _QuizScreenState extends State<QuizScreen> {
       _navigateToResults();
     } else {
       etheramindProvider.nextQuestion();
+      _resetAndStartTimer();
     }
   }
 
@@ -203,17 +188,17 @@ class _QuizScreenState extends State<QuizScreen> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: Theme.of(context).colorScheme.surface, // ✅ THEME
+        backgroundColor: Theme.of(context).colorScheme.surface,
         title: Text(
           'Selesai Quiz?',
           style: TextStyle(
-            color: Theme.of(context).colorScheme.onSurface, // ✅ THEME
+            color: Theme.of(context).colorScheme.onSurface,
           ),
         ),
         content: Text(
           'Apakah Anda yakin ingin menyelesaikan quiz ini?',
           style: TextStyle(
-            color: Theme.of(context).colorScheme.onSurface, // ✅ THEME
+            color: Theme.of(context).colorScheme.onSurface,
           ),
         ),
         actions: [
@@ -222,7 +207,7 @@ class _QuizScreenState extends State<QuizScreen> {
             child: Text(
               'Batal',
               style: TextStyle(
-                color: Theme.of(context).colorScheme.onSurface, // ✅ THEME
+                color: Theme.of(context).colorScheme.onSurface,
               ),
             ),
           ),
@@ -232,12 +217,12 @@ class _QuizScreenState extends State<QuizScreen> {
               _navigateToResults();
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: Theme.of(context).colorScheme.primary, // ✅ THEME
+              backgroundColor: Theme.of(context).colorScheme.primary,
             ),
             child: Text(
               'Ya, Selesai',
               style: TextStyle(
-                color: Theme.of(context).colorScheme.onPrimary, // ✅ THEME
+                color: Theme.of(context).colorScheme.onPrimary,
               ),
             ),
           ),
@@ -256,4 +241,3 @@ class _QuizScreenState extends State<QuizScreen> {
     );
   }
 }
-
